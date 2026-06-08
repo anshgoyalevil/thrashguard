@@ -1,0 +1,17 @@
+[package]
+name = "thrash-demo"
+description = "Replay-based visual demo for the ThrashGuard circuit breaker."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "thrash-demo"
+path = "src/main.rs"
+
+[dependencies]
+thrash-core.workspace = true
+serde_json.workspace = true

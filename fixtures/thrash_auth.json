@@ -1,0 +1,36 @@
+{
+  "scenario": "auth.ts hallucination loop",
+  "description": "A coding agent is asked to fix a failing auth test. It keeps rewriting getToken() in auth.ts, oscillating between two versions and hitting the identical TypeError each time. The real bug is the undefined session constructed in session.ts — which the agent reads but never fixes.",
+  "turns": [
+    {
+      "note": "first attempt — direct property access",
+      "edits": [{ "path": "auth.ts", "content": "export function getToken(session) {\n  return session.token;\n}" }],
+      "reads": [],
+      "observation": { "kind": "error", "signature": "TypeError: cannot read property 'token' of undefined (auth.test.ts:12)" }
+    },
+    {
+      "note": "add a guard",
+      "edits": [{ "path": "auth.ts", "content": "export function getToken(session) {\n  return session && session.token;\n}" }],
+      "reads": ["session.ts"],
+      "observation": { "kind": "error", "signature": "TypeError: cannot read property 'token' of undefined (auth.test.ts:12)" }
+    },
+    {
+      "note": "revert the guard — back to attempt 1",
+      "edits": [{ "path": "auth.ts", "content": "export function getToken(session) {\n  return session.token;\n}" }],
+      "reads": ["session.ts"],
+      "observation": { "kind": "error", "signature": "TypeError: cannot read property 'token' of undefined (auth.test.ts:12)" }
+    },
+    {
+      "note": "re-add the guard — back to attempt 2",
+      "edits": [{ "path": "auth.ts", "content": "export function getToken(session) {\n  return session && session.token;\n}" }],
+      "reads": [],
+      "observation": { "kind": "error", "signature": "TypeError: cannot read property 'token' of undefined (auth.test.ts:12)" }
+    },
+    {
+      "note": "revert again — third time in state A with the same error",
+      "edits": [{ "path": "auth.ts", "content": "export function getToken(session) {\n  return session.token;\n}" }],
+      "reads": [],
+      "observation": { "kind": "error", "signature": "TypeError: cannot read property 'token' of undefined (auth.test.ts:12)" }
+    }
+  ]
+}

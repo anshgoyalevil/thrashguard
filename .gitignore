@@ -1,0 +1,17 @@
+# Rust
+/target
+**/*.rs.bk
+Cargo.lock.orig
+
+# We DO commit Cargo.lock for the binary crates (proxy/demo) — reproducible builds.
+# (Left untracked only for pure libraries; this workspace ships binaries.)
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Secrets — never commit real API keys
+.env
+*.key

@@ -1,0 +1,17 @@
+[package]
+name = "thrash-core"
+description = "Behavioural loop-detection engine for AI coding agents — the ThrashGuard circuit breaker."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[lib]
+name = "thrash_core"
+path = "src/lib.rs"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

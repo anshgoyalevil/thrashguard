@@ -1,0 +1,24 @@
+{
+  "scenario": "healthy debugging session (control)",
+  "description": "A counter-example: the agent makes real forward progress on config.ts. Each edit is a genuine change, the error message evolves, and the run finally passes. ThrashGuard must stay silent here — no false positives.",
+  "turns": [
+    {
+      "note": "first cut",
+      "edits": [{ "path": "config.ts", "content": "export const cfg = read('config.json');" }],
+      "reads": [],
+      "observation": { "kind": "error", "signature": "Error: ENOENT no such file 'config.json'" }
+    },
+    {
+      "note": "fix the path",
+      "edits": [{ "path": "config.ts", "content": "export const cfg = read('./config/config.json');" }],
+      "reads": ["config/config.json"],
+      "observation": { "kind": "error", "signature": "SyntaxError: Unexpected token in JSON at position 0" }
+    },
+    {
+      "note": "parse it properly",
+      "edits": [{ "path": "config.ts", "content": "export const cfg = JSON.parse(read('./config/config.json'));" }],
+      "reads": [],
+      "observation": { "kind": "success", "signature": "" }
+    }
+  ]
+}
