@@ -19,8 +19,8 @@ intervention **doesn't invalidate the prompt cache**.
   ╔══════════════════════════════════════════════════════════════╗
   ║ ⚡ CIRCUIT BREAKER TRIPPED — injecting operator note          ║
   ╟──────────────────────────────────────────────────────────────╢
-  ║ System note: the edit just applied to `auth.ts` is the same   ║
-  ║ change already attempted 3 times … inspect `session.ts` …     ║
+  ║ System note: the edit just applied to `auth.ts` is the same  ║
+  ║ change already attempted 3 times … inspect `session.ts` …    ║
   ╚══════════════════════════════════════════════════════════════╝
 ```
 
